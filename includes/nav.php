@@ -29,8 +29,10 @@ crossorigin="anonymous">
    <li class="nav-item mx-3">
     <a class="nav-link" href="read.php" >Admin</a>
   </li>
+ 
+  </li>
     <li class="nav-item mx-3">
-    <a class="nav-link" href="create.php" >Create</a>
+    <a class="nav-link" href="login.php" >Login</a>
   </li>
 </ul>
 </nav>

@@ -5,6 +5,9 @@ include 'includes/nav.php';
 ?>
 
 <div class="container mt-4">
+	<div class="text-center">
+	<h1>Admin Dashboard</h1>
+	<a href="create.php">Create new class</a></div>
 <div class="d-flex flex-wrap justify-content-center">
 
 <?php
