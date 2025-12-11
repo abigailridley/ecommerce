@@ -5,7 +5,8 @@ include ('includes/footer.php');
 
 ?>
 
-<div>
+<div class="container">
+	<h1>Login</h1>
 <form action="login_action.php" method="post">
   <label for="inputemail">Email</label>
   <input type="text" 
