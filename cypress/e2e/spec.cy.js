@@ -45,13 +45,14 @@ describe("simple test ecommerce site", () => {
   //   cy.get("input[name='Price']").should("exist");
   //   cy.get("input[name='Image']").should("exist");
   // });
-  //delete product page
-  // it("navigates to delete product page", () => {
-  //   cy.visit(`${base}/delete.php?id=1`);
-  //   cy.contains("Delete class");
-  //   cy.get("button").contains("Confirm").should("exist");
-  //   cy.get("button").contains("Cancel").should("exist");
-  // });
+  // test delete product and modal functionality
+  it("tests delete product modal", () => {
+    cy.visit(`${base}/read.php`);
+    cy.contains("Delete").first().click();
+    cy.get("#deleteModal").should("be.visible");
+    cy.get("#deleteModal").contains("Delete").click();
+    cy.get("#deleteModal").should("not.be.visible");
+  });
   //basic smoke test for for navbar links
   it("checks navbar links", () => {
     cy.visit(base);
