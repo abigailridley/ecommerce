@@ -6,7 +6,7 @@ describe("simple test ecommerce site", () => {
 
   it("loads the homepage", () => {
     cy.visit(base);
-    cy.contains("Welcome");
+    cy.contains("elice foster yoga");
     cy.get("nav").should("be.visible");
   });
 
@@ -79,8 +79,26 @@ describe("simple test ecommerce site", () => {
     cy.get("input[name='email']").type("meg@jones.com");
     cy.get("input[name='pass']").type("123");
     cy.get("input[type='submit']").click();
-    cy.contains("Login successful");
+    cy.contains("elice foster yoga");
     //check redirect to index.php after timeout
     cy.url().should("eq", `${base}/index.php`);
+  });
+
+  //test logout functionality
+  it("test logout functionality", function () {
+    //first login
+    cy.visit(`${base}/login.php`);
+    cy.get("input[name='email']").type("meg@jones.com");
+    cy.get("input[name='pass']").type("123");
+    cy.get("input[type='submit']").click();
+    cy.contains("elice foster yoga");
+    //check redirect to index.php after timeout
+    cy.url().should("eq", `${base}/index.php`);
+    //now logout
+    cy.contains("Logout").click();
+    //check redirect to login.php after logout
+    cy.url().should("eq", `${base}/login.php`);
+    //check login link is visible again
+    cy.contains("Login").should("exist");
   });
 });
