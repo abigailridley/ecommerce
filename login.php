@@ -3,6 +3,15 @@ include ('includes/nav.php');
 include ('includes/footer.php');
 
 
+
+if (isset($errors) && !empty($errors)) {
+    echo '<div class="alert alert-danger" id="err_msg">';
+    echo '<strong>Errors:</strong><br>';
+    foreach ($errors as $msg) {
+        echo "- $msg<br>";
+    }
+    echo '</div>';
+}
 ?>
 
 <div class="container">
@@ -20,9 +29,10 @@ include ('includes/footer.php');
 	     class="form-control" 
 		 required 
 	     placeholder="password123">
-		
+
   <input type="submit" value="Login">
   
+
 </form>
 <button ><a href="register.php">Register</a></button>
 </div>

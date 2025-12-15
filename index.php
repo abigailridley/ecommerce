@@ -2,6 +2,14 @@
 include 'includes/nav.php';
 include 'includes/footer.php';
 
+session_start();
+
+//check if user is logged in and display welcome message
+if (isset($_SESSION['first_name'])) {
+     $name = ucfirst(strtolower($_SESSION['first_name']));
+ } else {
+     $name = null;
+ }
 
 ?>
 <!DOCTYPE html>
@@ -12,6 +20,7 @@ include 'includes/footer.php';
     <title>Document</title>
 </head>
 <body>
-    <div class='container'><h1 class="text-center">Welcome</h1></div>
+    <div class='container'><h1 class="text-center">
+elice foster yoga</h1></div>
 </body>
 </html>
