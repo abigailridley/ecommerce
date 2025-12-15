@@ -41,7 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         VALUES ('$n', '$d', '$img','$p')";
         $r = mysqli_query($link, $q);
         if ($r) 
-            {  echo '<p>New record added successfully</p>'; }
+           {
+        // Redirect back to admin read page
+        header ("Location: read.php");
+    } else {
+        echo "Error updating record " . $link->error;
+    }
    # Close database connection.
     mysqli_close($link); 
     exit();

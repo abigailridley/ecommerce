@@ -36,8 +36,13 @@ if (mysqli_num_rows($r) > 0 ) {
 	   <li class="list-group-item"><p class="text-center">&pound' . $row['item_price'] . '</p></li>
 	   <li class="list-group-item "><a class="btn btn-dark btn-lg btn-block" href="update.php?id='.$row['item_id'].'">
 	   Update</a></li>
-	   <li class="list-group-item"><a class="btn btn-dark btn-block" href="delete.php?item_id='.$row['item_id'].'">
-	   Delete Item</a></li>
+	   <li class="list-group-item"><button 
+    class="btn btn-dark btn-block" 
+    data-toggle="modal" 
+    data-target="#deleteModal"
+    data-id="'.$row['item_id'].'">
+    Delete 
+	</button></li>
 	  </ul>
 	</div>
  
@@ -53,5 +58,27 @@ else { echo '<p>There are currently no items in the table to display.</p>
 
 
 ?> 
+</div>
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure?</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        This action cannot be undone.
+      </div>
+
+      <div class="modal-footer">
+        <a id="confirmDelete" class="btn btn-danger">Delete</a>
+        <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 </div>
