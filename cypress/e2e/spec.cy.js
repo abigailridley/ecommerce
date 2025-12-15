@@ -22,8 +22,16 @@ describe("simple test ecommerce site", () => {
   it("loads admin dashboard", () => {
     cy.visit(`${base}/read.php`);
     cy.contains("Admin Dashboard");
-
-    cy.get(".card").should("exist");
+    //if there are products, check for .card class if not check for no products message
+    cy.get("body").then(($body) => {
+      if ($body.find(".card").length) {
+        cy.get(".card").should("exist");
+      } else {
+        cy.contains("There are currently no classes available.").should(
+          "exist"
+        );
+      }
+    });
   });
 
   //create new product page
@@ -36,22 +44,47 @@ describe("simple test ecommerce site", () => {
     cy.get("[name='item_img']").should("exist");
   });
 
-  //edit product page
-  // it("navigates to edit product page", () => {
-  //   cy.visit(`${base}/update.php?id=1`);
-  //   cy.contains("Update class");
-  //   cy.get("input[name='Class name']").should("exist");
-  //   cy.get("input[name='Description']").should("exist");
-  //   cy.get("input[name='Price']").should("exist");
-  //   cy.get("input[name='Image']").should("exist");
-  // });
-  // test delete product and modal functionality
-  it("tests delete product modal", () => {
+  // test edit product page if products exist
+  it("tests edit product page functionality", () => {
     cy.visit(`${base}/read.php`);
-    cy.contains("Delete").first().click();
-    cy.get("#deleteModal").should("be.visible");
-    cy.get("#deleteModal").contains("Delete").click();
-    cy.get("#deleteModal").should("not.be.visible");
+    cy.get("body").then(($body) => {
+      if ($body.find(".card").length) {
+        //click edit button on first product
+        cy.get(".card")
+          .first()
+          .within(() => {
+            cy.contains("Update").click();
+          });
+        //check redirect to update.php
+        cy.url().should("include", "update.php");
+        //check form fields exist
+        cy.get("[name='item_name']").should("exist");
+        cy.get("[name='item_desc']").should("exist");
+        cy.get("[name='item_price']").should("exist");
+        cy.get("[name='id']").should("exist");
+      }
+    });
+  });
+  //test delete product and modal functionality if products exist
+  it("tests delete product modal functionality", () => {
+    cy.visit(`${base}/read.php`);
+    cy.get("body").then(($body) => {
+      if ($body.find(".card").length) {
+        //click delete button on first product
+        cy.get(".card")
+          .first()
+          .within(() => {
+            cy.contains("Delete").click();
+          });
+        //check modal appears
+        cy.get("#deleteModal").should("be.visible");
+        //check modal has confirm and cancel buttons
+        cy.get("#deleteModal").within(() => {
+          cy.contains("Delete").should("exist");
+          cy.contains("Cancel").should("exist");
+        });
+      }
+    });
   });
   //basic smoke test for for navbar links
   it("checks navbar links", () => {

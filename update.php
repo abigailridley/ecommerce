@@ -87,10 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] =='GET' && isset($id)) {
 ?>
 
 <div class="container">
-    <h1>Update product: <?php echo $item_name ?? ''; ?></h1>
+    <h1>Update class: <?php echo $item_name ?? ''; ?></h1>
 <form action="update.php" method="post">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
-   <label for="item_name">Name: </label>
+   <label for="item_name">Class name: </label>
 <input type="text" name="item_name" class="form-control" value="<?php echo $_POST['item_name'] ?? $item_name ?? ''; ?>">
   <label for="item_desc">Description: </label>
 <input type="text" name="item_desc" class="form-control" value="<?php echo $_POST['item_desc'] ?? $item_desc ?? ''; ?>">
