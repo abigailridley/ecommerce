@@ -17,6 +17,7 @@ describe("simple test ecommerce site", () => {
     cy.get("input[name='email']").should("exist");
     cy.get("input[name='pass']").should("exist");
   });
+
   //admin dashboard loads
   it("loads admin dashboard", () => {
     cy.visit(`${base}/read.php`);
@@ -24,6 +25,7 @@ describe("simple test ecommerce site", () => {
 
     cy.get(".card").should("exist");
   });
+
   //create new product page
   it("navigates to create new product page", () => {
     cy.visit(`${base}/create.php`);
@@ -60,6 +62,7 @@ describe("simple test ecommerce site", () => {
     cy.contains("Login").click();
     cy.contains("Login");
   });
+
   //smoke test for titles on each page
   it("checks page titles", () => {
     const pages = ["", "login.php", "read.php", "create.php"];
@@ -68,5 +71,16 @@ describe("simple test ecommerce site", () => {
       cy.visit(`${base}/${page}`);
       cy.get("title").should("exist");
     });
+  });
+
+  //test login functionality and redirection
+  it("test login functionality", function () {
+    cy.visit(`${base}/login.php`);
+    cy.get("input[name='email']").type("meg@jones.com");
+    cy.get("input[name='pass']").type("123");
+    cy.get("input[type='submit']").click();
+    cy.contains("Login successful");
+    //check redirect to index.php after timeout
+    cy.url().should("eq", `${base}/index.php`);
   });
 });
