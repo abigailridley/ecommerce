@@ -34,7 +34,8 @@ crossorigin="anonymous">
     <a class="nav-link" href="index.php">Home</a>
   </li>
   <li class="nav-item mx-3">
-    <a class="nav-link" href="#">Classes</a>
+    <a class="nav-link" href="classes.php
+    ">Classes</a>
   </li>
   <li class="nav-item mx-3">
     <a class="nav-link" href="#" >About</a>

@@ -21,6 +21,6 @@ if (isset($_SESSION['first_name'])) {
 </head>
 <body>
     <div class='container'><h1 class="text-center">
-elice foster yoga</h1></div>
+yoga studio</h1></div>
 </body>
 </html>
