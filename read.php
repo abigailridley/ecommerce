@@ -52,7 +52,7 @@ if (mysqli_num_rows($r) > 0 ) {
 
 mysqli_close( $link) ; 
 	}
-else { echo '<p>There are currently no items in the table to display.</p>
+else { echo '<p>There are currently no classes available.</p>
 	' ; }
 	
 
@@ -60,7 +60,7 @@ else { echo '<p>There are currently no items in the table to display.</p>
 ?> 
 </div>
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel">
   <div class="modal-dialog">
     <div class="modal-content">
 
