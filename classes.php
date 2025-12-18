@@ -15,7 +15,7 @@ if (isset($_SESSION['first_name'])) {
      $name = ucfirst(strtolower($_SESSION['first_name']));
      echo "<h2>Available Classes for " . htmlspecialchars($name) . ":</h2>";
      echo '<div class="row">';
-     //fetch ites from database
+     //fetch items from database
      $q = "SELECT * FROM products";
      $r = mysqli_query($link, $q);
      if (mysqli_num_rows($r) > 0) {
@@ -47,14 +47,3 @@ if (isset($_SESSION['first_name'])) {
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-</body>
-</html>
