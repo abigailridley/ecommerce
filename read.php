@@ -36,8 +36,13 @@ if (mysqli_num_rows($r) > 0 ) {
 	   <li class="list-group-item"><p class="text-center">&pound' . $row['item_price'] . '</p></li>
 	   <li class="list-group-item "><a class="btn btn-dark btn-lg btn-block" href="update.php?id='.$row['item_id'].'">
 	   Update</a></li>
-	   <li class="list-group-item"><a class="btn btn-dark btn-block" href="delete.php?item_id='.$row['item_id'].'">
-	   Delete Item</a></li>
+	   <li class="list-group-item"><button 
+    class="btn btn-dark d-block w-100" 
+    data-bs-toggle="modal" 
+    data-bs-target="#deleteModal"
+    data-id="'.$row['item_id'].'">
+    Delete
+</button></li>
 	  </ul>
 	</div>
  
@@ -47,11 +52,44 @@ if (mysqli_num_rows($r) > 0 ) {
 
 mysqli_close( $link) ; 
 	}
-else { echo '<p>There are currently no items in the table to display.</p>
+else { echo '<p>There are currently no classes available.</p>
 	' ; }
 	
 
 
 ?> 
 </div>
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        This action cannot be undone.
+      </div>
+
+      <div class="modal-footer">
+        <a id="confirmDelete" class="btn btn-danger">Delete</a>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+
+    </div>
+  </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var deleteModal = document.getElementById('deleteModal');
+
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    var itemId = button.getAttribute('data-id');
+    var confirmDelete = document.getElementById('confirmDelete');
+    confirmDelete.setAttribute('href', 'delete.php?item_id=' + itemId);
+  });
+});
+</script>

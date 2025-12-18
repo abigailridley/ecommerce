@@ -9,9 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     //connect to db
     require ('includes/db_connect.php');
 
-    //create variables
-
-
 
 
     //initialise errors array
@@ -30,7 +27,10 @@ if( !empty($_POST['pass1']))
     if ( $_POST['pass1'] != $_POST['pass2'])
     { $errors[] = "Passwords do not match";}
     else
-    { $p = mysqli_real_escape_string( $link, trim($_POST['pass1']));}
+    { $p = mysqli_real_escape_string( $link, trim($_POST['pass1']));
+    //hash password
+    $hashed_pass = password_hash($p, PASSWORD_DEFAULT);
+    }
 }
 else { $errors[] = 'Enter your password';}
 
@@ -45,7 +45,7 @@ if (empty($errors))
 }
 if (empty($errors))
 {
-    $q = "INSERT INTO users (first_name, last_name, email, pass, reg_date) VALUES ('$fn','$ln','$e','$p', NOW() )";
+    $q = "INSERT INTO users (first_name, last_name, email, pass, reg_date) VALUES ('$fn','$ln','$e','$hashed_pass', NOW() )";
     $r = @mysqli_query ($link, $q);
     if ($r)
     {

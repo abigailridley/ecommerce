@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+//check if user is logged in and save name as capitalised variable
+if (isset($_SESSION['first_name'])) {
+     $name = ucfirst(strtolower($_SESSION['first_name']));
+ } else {
+     $name = null;
+ }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,11 +42,17 @@ crossorigin="anonymous">
    <li class="nav-item mx-3">
     <a class="nav-link" href="read.php" >Admin</a>
   </li>
- 
-  </li>
+   <?php if (isset($_SESSION['user_id'])) : ?>
+    <li class="nav-item mx-3 font-italic text-light"> Welcome, <?php echo htmlspecialchars($name); ?> </li>
+  <?php endif; ?>
+  <?php if (isset($_SESSION['user_id'])) : ?>
     <li class="nav-item mx-3">
-    <a class="nav-link" href="login.php" >Login</a>
-  </li>
+    <a class="nav-link" href="logout.php" >Logout</a> </li>
+  <?php else : ?>
+    <li class="nav-item mx-3">
+    <a class="nav-link" href="login.php" >Login</a> </li>
+  <?php endif; ?>
+ 
 </ul>
 </nav>
 </body>
